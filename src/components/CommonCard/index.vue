@@ -53,3 +53,31 @@
   color: #666;
 }
 </style>
+
+<style lang="scss">
+.emphasis {
+  margin-left: 5px;
+  color: #333;
+  font-weight: 700;
+}
+
+.increase {
+  margin-left: 5px;
+  margin-top: -3px;
+  width: 0;
+  height: 0;
+  border-width: 3px;
+  border-color: transparent transparent red transparent;
+  border-style: solid;
+}
+
+.decrease {
+  margin-left: 5px;
+  margin-top: 3px;
+  width: 0;
+  height: 0;
+  border-width: 3px;
+  border-color: green transparent transparent transparent;
+  border-style: solid;
+}
+</style>
