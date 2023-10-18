@@ -1,4 +1,11 @@
 import Vue from 'vue'
-import { Button } from 'element-ui'
 
-Vue.use(Button)
+import {
+  Card,
+  Row,
+  Col,
+} from 'element-ui'
+
+Vue.use(Card)
+Vue.use(Row)
+Vue.use(Col)
