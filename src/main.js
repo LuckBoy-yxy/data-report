@@ -7,6 +7,7 @@ import './plugins/element.js'
 import 'element-ui/lib/theme-chalk/index.css'
 import Echarts from 'echarts'
 import vueEcharts from 'vue-echarts'
+import './plugins/vcharts.js'
 
 import './styles/index.scss'
 
