@@ -1,12 +1,12 @@
 <template>
   <div class="">
-    sales-view
+
   </div>
 </template>
 
 <script>
   export default {
-    name: ''
+    name: 'SalesView',
   }
 </script>
 
