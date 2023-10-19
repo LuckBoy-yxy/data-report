@@ -1,5 +1,5 @@
 <template>
-  <div class="total-sales">
+  <div class="total-orders">
     <CommonCard
       title="累计订单量"
       value="2,754,619"

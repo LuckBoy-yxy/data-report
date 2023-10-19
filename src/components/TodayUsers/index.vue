@@ -1,5 +1,5 @@
 <template>
-  <div class="total-sales">
+  <div class="today-users">
     <CommonCard
       title="今日交易用户数"
       value="386,586"
