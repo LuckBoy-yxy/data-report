@@ -10,7 +10,9 @@
         </template>
 
         <template>
-          <div class="chart-wrapper">111</div>
+          <div class="chart-wrapper">
+            <LiquidFill />
+          </div>
         </template>
       </el-card>
 
@@ -29,10 +31,12 @@
 
 <script>
   import BMapScatter from '../BMapScatter/index.vue'
+  import LiquidFill from '../LiquidFill/index.vue'
   export default {
     name: 'MapView',
     components: {
-      BMapScatter
+      BMapScatter,
+      LiquidFill
     }
   }
 </script>
