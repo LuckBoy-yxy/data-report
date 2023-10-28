@@ -31,7 +31,7 @@
 .home {
   padding: 20px;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   background-color: #eee;
   box-sizing: border-box;
 }
