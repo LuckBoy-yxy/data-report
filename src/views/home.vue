@@ -16,6 +16,8 @@
   import MapView from '../components/MapView/index.vue'
   import SalesView from '../components/SalesView/index.vue'
 
+  import { wordcloud, screenData, mapScatter } from '../api'
+
   export default {
     name: 'Home',
     components: {
@@ -23,6 +25,36 @@
       BottomView,
       MapView,
       SalesView
+    },
+    data() {
+      return {
+        reportData: null,
+        wordCloud: null,
+        mapData: null
+      }
+    },
+    methods: {
+      getReportData() {
+        return this.reportData
+      },
+      getWordCloud() {
+        return this.wordCloud
+      },
+      getMapData() {
+        return this.mapData
+      }
+    },
+    provide() {
+      return {
+        getReportData: this.getReportData,
+        getWordCloud: this.getWordCloud,
+        getMapData: this.getMapData
+      }
+    },
+    mounted() {
+      screenData().then(data => { this.reportData = data })
+      wordcloud().then(data => { this.wordCloud = data })
+      mapScatter().then(data => { this.mapData = data })
     }
   }
 </script>

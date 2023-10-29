@@ -16,27 +16,27 @@
           rows: [
             {
               name: '大帅',
-              value: 100 * Math.random()
+              value: Math.floor(100 * Math.random())
             },
             {
               name: '中帅',
-              value: 100 * Math.random()
+              value: Math.floor(100 * Math.random())
             },
             {
               name: '小帅',
-              value: 100 * Math.random()
+              value: Math.floor(100 * Math.random())
             },
             {
               name: '袁大帅',
-              value: 100 * Math.random()
+              value: Math.floor(100 * Math.random())
             },
             {
               name: '袁中帅',
-              value: 100 * Math.random()
+              value: Math.floor(100 * Math.random())
             },
             {
               name: '袁小帅',
-              value: 100 * Math.random()
+              value: Math.floor(100 * Math.random())
             }
           ]
         },

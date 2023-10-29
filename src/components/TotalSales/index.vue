@@ -31,10 +31,11 @@
 
 <script>
   import CommonCardMixin from '../../mixins/commonCardMixin'
+  import commonDataMixin from '../../mixins/commonDataMixin'
 
   export default {
     name: 'TotalSales',
-    mixins: [CommonCardMixin]
+    mixins: [CommonCardMixin, commonDataMixin]
   }
 </script>
 
