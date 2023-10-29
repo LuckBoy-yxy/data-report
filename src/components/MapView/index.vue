@@ -22,7 +22,9 @@
         </template>
 
         <template>
-          <div class="chart-wrapper">111</div>
+          <div class="chart-wrapper">
+            <WordCloud />
+          </div>
         </template>
       </el-card>
     </div>
@@ -32,11 +34,13 @@
 <script>
   import BMapScatter from '../BMapScatter/index.vue'
   import LiquidFill from '../LiquidFill/index.vue'
+  import WordCloud from '../WordCloud/index.vue'
   export default {
     name: 'MapView',
     components: {
       BMapScatter,
-      LiquidFill
+      LiquidFill,
+      WordCloud
     }
   }
 </script>
