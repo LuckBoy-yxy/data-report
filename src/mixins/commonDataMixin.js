@@ -1,5 +1,6 @@
 function format(value) {
-  return value
+  const reg = /\d{1,3}(?=(\d{3})+$)/g
+  return `${value}`.replace(reg, '$&,')
 }
 
 function wrapperPercentage(option, key) {
@@ -7,7 +8,7 @@ function wrapperPercentage(option, key) {
 }
 
 function wrapperMoney(option, key) {
-  return option && option[key] ? `¥ ${ option[key] }` : '¥ 0.00'
+  return option && option[key] ? `¥ ${ format(option[key]) }` : '¥ 0.00'
 }
 
 function wrapperNumber(option, key) {
