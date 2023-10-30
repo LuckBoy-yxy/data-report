@@ -15,6 +15,10 @@ function wrapperNumber(option, key) {
   return option && option[key] ? format(option[key]) : 0
 }
 
+function wrapperOriginalNumber(o, k) {
+  return o && o[k] ? o[k] : 0
+}
+
 function wrapperArray (option, key) {
   return option && option[key] ? option[key] : []
 }
@@ -56,6 +60,21 @@ export default {
     },
     orderUserTrendAxis() {
       return wrapperArray(this.reportData, 'orderUserTrendAxis')
+    },
+    userToday() {
+      return wrapperNumber(this.reportData, 'userToday')
+    },
+    userTodayNumber() {
+      return wrapperOriginalNumber(this.reportData, 'userToday')
+    },
+    userLastMonth() {
+      return wrapperOriginalNumber(this.reportData, 'userLastMonth')
+    },
+    userGrowthLastDay() {
+      return wrapperPercentage(this.reportData, 'userGrowthLastDay')
+    },
+    userGrowthLastMonth() {
+      return wrapperPercentage(this.reportData, 'userGrowthLastMonth')
     }
   },
   inject: ['getReportData', 'getWordCloud', 'getMapData']
