@@ -49,7 +49,11 @@
           <div class="title-wrapper">
             <div class="title">分类销售排行</div>
             <div class="radio-wrapper">
-              <el-radio-group v-model="radioSelect" size="small">
+              <el-radio-group
+                v-model="radioSelect"
+                size="small"
+                @change="onPieChartCategoryChange"
+              >
                 <el-radio-button label="品类"></el-radio-button>
                 <el-radio-button label="商品"></el-radio-button>
               </el-radio-group>
@@ -68,6 +72,14 @@
 
 <script>
   import CommonDataMixin from '../../mixins/commonDataMixin'
+  const colors = [
+    '#8d7fec',
+    '#5085f2',
+    '#f8726b',
+    '#e7e702',
+    '#78f283',
+    '#4bc1fc'
+  ]
 
   export default {
     name: 'BottomView',
@@ -112,57 +124,37 @@
         this.renderTable(page)
       },
       renderPieChart() {
-        const mockData = [
-          {
-            legendname: '粉面粥店',
-            value: 67,
-            percent: '22.92%',
+        if (!this.category1.data1 | !this.category2.data1) return
+        let data
+        let axis
+        let total = 0
+        if (this.radioSelect === '品类') {
+          data = this.category1.data1.slice(0, 6)
+          axis = this.category1.axisX.slice(0, 6)
+          total = data.reduce((sum, item) => { item + sum }, 0)
+        } else {
+          data = this.category2.data1.slice(0, 6)
+          axis = this.category2.axisX.slice(0, 6)
+          total = data.reduce((sum, item) => { item + sum }, 0)
+        }
+
+        const chartData = []
+        data.forEach((item, index) => {
+          const percent = `${ ((item / total) * 100).toFixed(2) }%`
+          chartData.push({
+            egendname: axis[index],
+            value: item,
+            percent,
             itemStyle: {
-              color: '#e7e702'
+              color: colors[index]
             },
-            name: '粉面粥店 | 22.92%'
-          },
-          {
-            legendname: '简餐便当',
-            value: 97,
-            percent: '10.71%',
-            itemStyle: {
-              color: '#8d7fec'
-            },
-            name: '简餐便当 | 10.71%'
-          },
-          {
-            legendname: '汉堡披萨',
-            value: 92,
-            percent: '14.29%',
-            name: '汉堡披萨 | 14.29%'
-          },
-          {
-            legendname: '香锅冒菜',
-            value: 36,
-            percent: '19.64%',
-            name: '香锅冒菜 | 19.64%'
-          },
-          {
-            legendname: '小吃炸串',
-            value: 63,
-            percent: '5.36%',
-            name: '小吃炸串 | 5.36%'
-          },
-          {
-            legendname: '地方菜系',
-            value: 100,
-            percent: '27.08%',
-            itemStyle: {
-              color: '#5082f2'
-            },
-            name: '地方菜系 | 27.08%'
-          }
-        ]
+            name: `${ axis[index] } | ${ percent }`
+          })
+        })
         this.categoryOptions = {
           title: [
             {
-              text: '品类分布',
+              text: `${ this.radioSelect }分布`,
               textStyle: {
                 fontSize: 14,
                 color: '#666'
@@ -172,7 +164,7 @@
             },
             {
               text: '累计订单量',
-              subtext: '336',
+              subtext: total,
               x: '34.5%',
               y: '42.5%',
               textAlign: 'center',
@@ -190,7 +182,7 @@
             {
               name: '品类分布',
               type: 'pie',
-              data: mockData,
+              data: chartData,
               label: {
                 normal: {
                   show: true,
@@ -288,6 +280,10 @@
         }
         this.searchUserOption = createOption('user')
         this.searchNumberOption = createOption('count')
+      },
+      onPieChartCategoryChange(type) {
+        this.radioSelect = type
+        this.renderPieChart()
       }
     },
     mounted() {
