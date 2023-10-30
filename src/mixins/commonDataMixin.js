@@ -75,7 +75,25 @@ export default {
     },
     userGrowthLastMonth() {
       return wrapperPercentage(this.reportData, 'userGrowthLastMonth')
-    }
+    },
+    orderFullYear() {
+      return wrapperArray(this.reportData, 'orderFullYear')
+    },
+    orderFullYearAxis() {
+      return wrapperArray(this.reportData, 'orderFullYearAxis')
+    },
+    orderRank() {
+      return wrapperArray(this.reportData, 'orderRank')
+    },
+    userFullYear() {
+      return wrapperArray(this.reportData, 'userFullYear')
+    },
+    userFullYearAxis() {
+      return wrapperArray(this.reportData, 'userFullYearAxis')
+    },
+    userRank() {
+      return wrapperArray(this.reportData, 'userRank')
+    },
   },
   inject: ['getReportData', 'getWordCloud', 'getMapData']
 }

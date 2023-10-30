@@ -75,8 +75,11 @@
 </template>
 
 <script>
+  import CommonDataMixin from '../../mixins/commonDataMixin'
+
   export default {
     name: 'SalesView',
+    mixins: [CommonDataMixin],
     data() {
       return {
         activeIndex: '1',
@@ -113,9 +116,32 @@
             }
           ]
         },
-        chartOption: {
+        chartOption: {}
+      }
+    },
+    computed: {
+      rankData() {
+        return this.activeIndex === '1' ? this.orderRank : this.userRank
+      }
+    },
+    watch: {
+      orderFullYear() {
+        this.render(this.orderFullYear, this.orderFullYearAxis, '年度销售额')
+      }
+    },
+    methods: {
+      onMenuSelect(index) {
+        this.activeIndex = index
+        if (index === '1') {
+          this.render(this.orderFullYear, this.orderFullYearAxis, '年度销售额')
+        } else {
+          this.render(this.userFullYear, this.userFullYearAxis, '年度用户访问量')
+        }
+      },
+      render(data, axis, title) {
+        this.chartOption = {
           title: {
-            text: '年度销售额',
+            text: title,
             textStyle: {
               fontSize: 12,
               color: '#666'
@@ -125,20 +151,7 @@
           },
           xAxis: {
             type: 'category',
-            data: [
-              '1月',
-              '2月',
-              '3月',
-              '4月',
-              '5月',
-              '6月',
-              '7月',
-              '8月',
-              '9月',
-              '10月',
-              '11月',
-              '12月'
-            ],
+            data: axis,
             axisLine: {
               lineStyle: {
                 color: '#999'
@@ -178,66 +191,11 @@
             {
               type: 'bar',
               barWidth: '35%',
-              data: [
-                200,
-                250,
-                300,
-                350,
-                400,
-                450,
-                500,
-                550,
-                600,
-                650,
-                700,
-                750,
-              ],
+              data,
               color: ['#3398DB']
             }
           ]
-        },
-        rankData: [
-          {
-            no: 1,
-            name: '肯德基',
-            money: '323,234'
-          },
-          {
-            no: 2,
-            name: '麦当劳',
-            money: '323,234'
-          },
-          {
-            no: 3,
-            name: '汉堡王',
-            money: '323,234'
-          },
-          {
-            no: 4,
-            name: '海底捞',
-            money: '323,234'
-          },
-          {
-            no: 5,
-            name: '西贝筱面村',
-            money: '323,234'
-          },
-          {
-            no: 6,
-            name: '德克士',
-            money: '323,234'
-          },
-          {
-            no: 7,
-            name: '真功夫',
-            money: '323,234'
-          }
-        ]
-      }
-    },
-    methods: {
-      onMenuSelect(index) {
-        this.activeIndex = index
+        }
       }
     }
   }
