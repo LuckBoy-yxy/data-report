@@ -15,6 +15,10 @@ function wrapperNumber(option, key) {
   return option && option[key] ? format(option[key]) : 0
 }
 
+function wrapperArray (option, key) {
+  return option && option[key] ? option[key] : []
+}
+
 export default {
   computed: {
     reportData() {
@@ -31,6 +35,15 @@ export default {
     },
     salesLastDay() {
       return wrapperMoney(this.reportData, 'salesLastDay')
+    },
+    orderToday() {
+      return wrapperNumber(this.reportData, 'orderToday')
+    },
+    orderLastDay() {
+      return wrapperNumber(this.reportData, 'orderLastDay')
+    },
+    orderTrend() {
+      return wrapperArray(this.reportData, 'orderTrend')
     }
   },
   inject: ['getReportData', 'getWordCloud', 'getMapData']
