@@ -94,6 +94,14 @@ export default {
     userRank() {
       return wrapperArray(this.reportData, 'userRank')
     },
+    wordCloud() {
+      return this.wordCloud()
+    }
   },
-  inject: ['getReportData', 'getWordCloud', 'getMapData']
+  inject: ['getReportData', 'getWordCloud', 'getMapData'],
+  methods: {
+    format(v) {
+      return format(v)
+    }
+  }
 }
