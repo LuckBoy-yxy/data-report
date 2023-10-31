@@ -117,6 +117,9 @@
         this.userCount = this.format(totalData.reduce((sum, item) => { item.users + sum }, 0))
         this.searchCount = this.format(totalData.reduce((sum, item) => { item.count + sum }, 0))
         this.renderLineChart()
+      },
+      category1() {
+        this.renderPieChart()
       }
     },
     methods: {

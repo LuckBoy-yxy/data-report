@@ -114,6 +114,9 @@ export default {
     },
     category2() {
       return wrapperObject(this.reportData, 'category.data2')
+    },
+    mapData() {
+      return this.getMapData()
     }
   },
   inject: ['getReportData', 'getWordCloud', 'getMapData'],

@@ -7,6 +7,8 @@
 </template>
 
 <script>
+  import CommonDataMixin from '../../mixins/commonDataMixin'
+
   const getColor = (value) => {
     let str = '#c7c7cb'
     if (value) {
@@ -23,58 +25,62 @@
   } 
   export default {
     name: 'LiquidFill',
+    mixins: [CommonDataMixin],
     data() {
       return {
-        chartData: {
-          columns: ['title', 'percent'],
-          rows: [
-            {
-              title: '支付转化率',
-              percent: 0.38
-            }
-          ]
-        },
+        chartData: {},
         chartSettings: {}
       }
     },
-    mounted() {
-      this.chartSettings = {
-        seriesMap: {
-          '支付转化率': {
-            radius: '80%',
-            label: {
-              normal: {
-                formatter(v) {
-                  return `${ Math.floor(v.data.value * 100) }%`
+    watch: {
+      userGrowthLastMonth() {
+        this.chartData = {
+          columns: ['title', 'percent'],
+          rows: [
+            {
+              title: '用户月同比增长',
+              percent: this.userGrowthLastMonth / 100
+            }
+          ]
+        }
+        this.chartSettings = {
+          seriesMap: {
+            '用户月同比增长': {
+              radius: '80%',
+              label: {
+                normal: {
+                  formatter(v) {
+                    return `${ (v.data.value * 100).toFixed(2) }%`
+                  },
+                  insideColor: '#fff',
+                  textStyle: {
+                    color: '#999',
+                    fontSize: 36,
+                    fontWeight: 'normal' 
+                  },
+                  position: ['50%', '50%']
+                }
+              },
+              outline: {
+                itemStyle: {
+                  borderColor: '#aaa4a4',
+                  borderWidth: 1,
+                  color: 'none',
+                  shadowBlur: 0,
+                  shadowColor: '#fff'
                 },
-                insideColor: '#fff',
-                textStyle: {
-                  color: '#999',
-                  fontSize: 36,
-                  fontWeight: 'normal' 
-                },
-                position: ['50%', '50%']
-              }
-            },
-            outline: {
+                borderDistance: 0
+              },
+              backgroundStyle: {
+                color: '#fff'
+              },
               itemStyle: {
-                borderColor: '#aaa4a4',
-                borderWidth: 1,
-                color: 'none',
                 shadowBlur: 0,
                 shadowColor: '#fff'
               },
-              borderDistance: 0
-            },
-            backgroundStyle: {
-              color: '#fff'
-            },
-            itemStyle: {
-              shadowBlur: 0,
-              shadowColor: '#fff'
-            },
-            amplitude: 8,
-            color: [getColor(this.chartData.rows[0].percent)]
+              amplitude: 8,
+              color: [getColor(this.chartData.rows[0].percent)]
+            }
           }
         }
       }
